@@ -1,7 +1,6 @@
 use criterion::{Criterion, black_box, criterion_group, criterion_main};
 use state_flux_mini::State;
 use std::sync::Arc;
-use tokio::runtime::Runtime;
 
 fn bench_state_get(c: &mut Criterion) {
     let state = Arc::new(State::new(123usize));
@@ -35,7 +34,10 @@ fn bench_state_set_get(c: &mut Criterion) {
 }
 
 fn bench_state_notify(c: &mut Criterion) {
-    let rt = Runtime::new().unwrap();
+    let rt = tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .build()
+        .unwrap();
 
     c.bench_function("state_notify_one_subscriber", |b| {
         b.to_async(&rt).iter(|| async {

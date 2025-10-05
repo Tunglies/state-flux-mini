@@ -77,7 +77,7 @@ async fn test_pointer_eq_shortcut() {
 
     // re-store same Arc using set (assumes you add this method to State)
     let old = state.get();
-    state.set((*old).clone()); // same value, new Arc
+    state.set(*old); // same value, new Arc
     let res = timeout(Duration::from_millis(50), sub.changed()).await;
     assert!(res.is_err(), "no change because pointer eq");
 }
