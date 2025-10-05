@@ -1,0 +1,33 @@
+[package]
+name = "state-flux-mini"
+version = "0.1.0"
+edition = "2024"
+authors = ["Tunglies"]
+description = "A minimal state management crate for Rust"
+keywords = ["state", "flux", "management", "rust", "async"]
+
+[dependencies]
+arc-swap = "1.7"
+tokio = { version = "1.47.1", features = ["rt-multi-thread", "macros", "sync"] }
+
+[dev-dependencies]
+tokio = { version = "1.47.1", features = [
+    "rt-multi-thread",
+    "macros",
+    "sync",
+    "time",
+] }
+criterion = { version = "0.5", features = ["async_tokio"] }
+
+[[test]]
+name = "state"
+path = "test/state.rs"
+
+[[test]]
+name = "state_stress"
+path = "test/state_stress.rs"
+
+[[bench]]
+name = "state"
+path = "benches/state.rs"
+harness = false
