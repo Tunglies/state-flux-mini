@@ -5,6 +5,7 @@ edition = "2024"
 authors = ["Tunglies"]
 description = "A minimal state management crate for Rust"
 keywords = ["state", "flux", "management", "rust", "async"]
+license-file = "LICENSE"
 
 [dependencies]
 arc-swap = "1.7"
